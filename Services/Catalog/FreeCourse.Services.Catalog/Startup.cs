@@ -1,8 +1,10 @@
+using FreeCourse.Services.Catalog.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace FreeCourse.Services.Catalog
@@ -22,6 +24,13 @@ namespace FreeCourse.Services.Catalog
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
+            services.AddSingleton<IDatabaseSettings>(sp =>
+            {
+                return sp.GetRequiredService <IOptions<DatabaseSettings>>().Value;
+            });
+
+       
+            services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseSettings"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FreeCourse.Services.Catalog", Version = "v1" });
