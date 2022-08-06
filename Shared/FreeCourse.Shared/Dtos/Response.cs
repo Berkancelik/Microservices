@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FreeCourse.Shared.Dtos
 {
-    public class ResponseDto<T>
+    public class Response<T>
     { //Static Factory Metot
         public T Data { get; private set; }
 
@@ -18,19 +18,19 @@ namespace FreeCourse.Shared.Dtos
         public bool IsSuccessFull { get; private set; }
         public List<string> Errors { get; set; }
 
-        public static ResponseDto<T> Succes(T data, int statusCode)
+        public static Response<T> Succes(T data, int statusCode)
         {
-            return new ResponseDto<T> { Data = data, StatusCode = statusCode, IsSuccessFull = true };
+            return new Response<T> { Data = data, StatusCode = statusCode, IsSuccessFull = true };
         }
 
-        public static ResponseDto<T> Success(int statusCode)
+        public static Response<T> Success(int statusCode)
         {
-            return new ResponseDto<T> { Data = default(T), StatusCode = statusCode, IsSuccessFull = true };
+            return new Response<T> { Data = default(T), StatusCode = statusCode, IsSuccessFull = true };
         }
 
-        public static ResponseDto<T> Fail(List<string> errors, int statusCode)
+        public static Response<T> Fail(List<string> errors, int statusCode)
         {
-            return new ResponseDto<T>
+            return new Response<T>
             {
                 Errors = errors,
                 StatusCode = statusCode,
@@ -38,9 +38,9 @@ namespace FreeCourse.Shared.Dtos
             };
         }
 
-        public static ResponseDto<T> Fail(string error, int statusCode)
+        public static Response<T> Fail(string error, int statusCode)
         {
-            return new ResponseDto<T> { Errors = new List<string> { error }, StatusCode = statusCode, IsSuccessFull = false };
+            return new Response<T> { Errors = new List<string> { error }, StatusCode = statusCode, IsSuccessFull = false };
         }
     }
 }
