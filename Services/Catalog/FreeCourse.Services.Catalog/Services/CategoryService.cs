@@ -29,14 +29,14 @@ namespace FreeCourse.Services.Catalog.Services
         {
             var categories = await _categoryCollection.Find(category => true).ToListAsync();
 
-            return Response<List<CategoryDto>>.Succes(_mapper.Map<List<CategoryDto>>(categories), 200);
+            return Response<List<CategoryDto>>.Success(_mapper.Map<List<CategoryDto>>(categories), 200);
         }
 
         public async Task<Response<CategoryDto>> CreateAsync(Category category)
         {
             await _categoryCollection.InsertOneAsync(category);
 
-            return Response<CategoryDto>.Succes(_mapper.Map<CategoryDto>(category), 200);
+            return Response<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), 200);
         }
 
         public async Task<Response<CategoryDto>> GetByIdAsync(string id)
@@ -47,7 +47,7 @@ namespace FreeCourse.Services.Catalog.Services
                 return Response<CategoryDto>.Fail("Category not found", 404);
             }
 
-            return Response<CategoryDto>.Succes(_mapper.Map<CategoryDto>(category), 200);
+            return Response<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), 200);
         }
     }
 }

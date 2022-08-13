@@ -18,7 +18,7 @@ namespace FreeCourse.Shared.Dtos
         public bool IsSuccessFull { get; private set; }
         public List<string> Errors { get; set; }
 
-        public static Response<T> Succes(T data, int statusCode)
+        public static Response<T> Success(T data, int statusCode)
         {
             return new Response<T> { Data = data, StatusCode = statusCode, IsSuccessFull = true };
         }
